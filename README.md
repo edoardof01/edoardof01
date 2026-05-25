@@ -1,100 +1,123 @@
 # Edoardo Fanciullacci
 
-**Ingegnere Informatico** con un percorso non convenzionale: da Gestionale a Informatica, entrambe con **110/110 con Lode** — un background che unisce visione sistemica e rigore tecnico.
+**Software Engineer** with an unconventional path: from Management Engineering to Computer Engineering, both with **110/110 with Honours** — a background that blends systems thinking with technical rigour.
 
-Mi specializzo in **sistemi distribuiti**, **infrastrutture cloud-native** e **AI applicata**. Non mi interessa solo far funzionare le cose: voglio capire *perché* funzionano, costruire con rigore formale e lasciare codice che resiste al tempo.
+I specialise in **distributed systems**, **cloud-native infrastructures**, and **applied AI**. I'm not just interested in making things work: I want to understand *why* they work, build with formal rigour, and leave behind code that stands the test of time.
 
-> 📍 Firenze, Italia · Aperto a opportunità remote e ibride
+> 📍 Florence, Italy · Open to remote and hybrid opportunities
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Edoardo_Fanciullacci-0077B5?style=flat&logo=linkedin)](https://linkedin.com/in/edoardo-fanciullacci)
 [![Email](https://img.shields.io/badge/Email-edoardofanciullacci01@gmail.com-D14836?style=flat&logo=gmail)](mailto:edoardofanciullacci01@gmail.com)
 
 ---
 
-## 🎓 Formazione
+## 🎓 Education
 
-| Titolo | Ateneo | Voto |
+| Degree | University | Grade |
 |---|---|---|
-| **Laurea Magistrale** — Ingegneria Informatica | Università di Firenze | 110/110 con Lode |
-| **Laurea Triennale** — Ingegneria Gestionale | Università di Firenze | 110/110 con Lode |
+| **Master's Degree** — Computer Engineering | University of Florence | 110/110 with Honours |
+| **Bachelor's Degree** — Management Engineering | University of Florence | 110/110 with Honours |
 
 ---
 
-## 🚀 Progetti in Evidenza
+## 🚀 Featured Projects
 
-### 📐 [Tesi Magistrale] Valutazione e Rifattorizzazione di Topologie SAGA
-> *Framework per l'analisi stocastica della consistenza in architetture a microservizi*
+### 📐 [Master's Thesis] Evaluation and Refactoring of SAGA Topologies
+> *Framework for stochastic consistency analysis in microservices architectures*
 
-Architetture a microservizi promettono scalabilità, ma nascondono un problema sottile: **come garantire la consistenza finale quando una transazione distribuita fallisce parzialmente?**
+Microservices architectures promise scalability, but hide a subtle problem: **how do you guarantee eventual consistency when a distributed transaction partially fails?**
 
-Ho costruito un framework teorico ed empirico per analizzare e ottimizzare il **Time to Consistency** in pattern SAGA con ramificazioni parallele (AND) e condizionali (XOR).
+I built a theoretical and empirical framework to analyse and optimise **Time to Consistency** in SAGA patterns with parallel (AND) and conditional (XOR) branches.
 
-**Contributo chiave:** un algoritmo Greedy di rifattorizzazione basato sulla **dominanza stocastica delle CDF**, che minimizza i tempi di recupero scegliendo l'ordine ottimale di esecuzione dei compensating transactions.
+**Key contribution:** a Greedy refactoring algorithm based on **stochastic dominance of CDFs**, which minimises recovery times by choosing the optimal execution order for compensating transactions.
 
 ```
 Stack: Java (Sirio/Eulero) · Kubernetes · Apache Kafka
-Risultati: +15.29% performance · MAE < 0.02 (validazione empirica)
+Results: +15.29% performance · MAE < 0.02 (empirical validation)
+```
+
+---
+
+### 🌐 [Platform Project](https://github.com/edoardof01/Platform_Project) — Cloud-Native Microservices Platform
+> *Production-grade microservices architecture with GitOps, observability, and Infrastructure as Code*
+
+An end-to-end platform that goes beyond business logic: it covers the full lifecycle of a cloud-native system — from application code, to orchestration, monitoring, and infrastructure provisioning.
+
+Three Spring Boot microservices (API Gateway, Product Service, Order Service) orchestrated on **Kubernetes** with declarative deployments and automatic reconciliation via **ArgoCD** (Self-Heal + Prune). Secret management is handled with **Bitnami Sealed Secrets** — asymmetric encryption that allows secrets to be versioned in Git without exposing credentials.
+
+- 🔄 **GitOps-first:** every commit to `k8s/` is automatically synced to the cluster by ArgoCD
+- 🛡️ **Resilience:** Circuit Breaker and Time Limiter (Resilience4j) on the API Gateway to prevent cascading failures
+- 📊 **Observability:** Prometheus Operator with ServiceMonitor + Grafana for custom metrics (Micrometer/Actuator)
+- 🔐 **Secrets management:** Sealed Secrets with `kubeseal` — safely versionable encrypted secrets
+- 🏗️ **IaC:** Terraform for VM provisioning on ARM64 on OCI (Oracle Cloud Always Free Tier)
+- ⚙️ **CI/CD:** GitHub Actions with build matrix, Maven caching, and automatic push to Docker Hub
+
+```
+Stack: Java 21 · Spring Boot 4 · Spring Cloud Gateway · PostgreSQL · Flyway
+Infrastructure: Kubernetes (Minikube) · ArgoCD · Prometheus · Grafana · Docker · Terraform (OCI)
+Security: Bitnami Sealed Secrets · RBAC · Liveness/Readiness Probes
 ```
 
 ---
 
 ### 🤖 [cf_ai_rag](https://github.com/edoardof01/cf_ai_rag) — Advanced Hybrid RAG System
-> *Sistema RAG production-grade, completamente self-hosted su Kubernetes*
+> *Production-grade RAG system, fully self-hosted on Kubernetes*
 
-Un sistema di Retrieval-Augmented Generation che va oltre il semplice vector search. Il design ibrido combina **due paradigmi di retrieval** per massimizzare la qualità delle risposte:
+A Retrieval-Augmented Generation system that goes beyond simple vector search. The hybrid design combines **two retrieval paradigms** to maximise response quality:
 
-- 🔍 **Dense retrieval** (semantico) via **Milvus**
-- 📖 **Sparse retrieval** (lessicale) via **BM25 su Redis**
-- 🎯 **Cross-Encoder reranking** per la selezione finale
-- 🧠 **Memoria conversazionale multi-strategia**: Sliding Window · Summary · Vector Memory
-- ✍️ **Query Rewriting** contestuale + gestione dinamica del budget dei token
+- 🔍 **Dense retrieval** (semantic) via **Milvus**
+- 📖 **Sparse retrieval** (lexical) via **BM25 on Redis**
+- 🎯 **Cross-Encoder reranking** for final selection
+- 🧠 **Multi-strategy conversational memory**: Sliding Window · Summary · Vector Memory
+- ✍️ **Contextual Query Rewriting** + dynamic token budget management
 
 ```
-Infrastruttura: Minikube · Ollama (Qwen 2.5) · Milvus · Redis
-Deploy: completamente automatizzato con persistenza dei dati
+Infrastructure: Minikube · Ollama (Qwen 2.5) · Milvus · Redis
+Deployment: fully automated with data persistence
 ```
 
 ---
 
-## 🛠 Altri Progetti
+## 🛠 Other Projects
 
-### [SessionBuilder](https://github.com/edoardof01/sessionBuilder) — Java Desktop App con TDD rigoroso
-Applicazione sviluppata con una disciplina ingegneristica end-to-end: ogni riga di codice coperta da test prima di essere scritta.
+### [SessionBuilder](https://github.com/edoardof01/sessionBuilder) — Java Desktop App with Strict TDD
+Application developed with end-to-end engineering discipline: every line of code covered by tests before being written.
 
-- **Pipeline CI/CD** completa con GitHub Actions
-- **Analisi statica** con SonarCloud + **Mutation Testing** con PIT
-- **Architettura** MVC + Service Layer con gestione transazionale custom via `ThreadLocal`
+- Complete **CI/CD pipeline** with GitHub Actions
+- **Static analysis** with SonarCloud + **Mutation Testing** with PIT
+- **MVC + Service Layer architecture** with custom transactional management via `ThreadLocal`
 
-### [Multi-Label Emotion Classifier](https://github.com/edoardof01/fml-laboratory) — NLP con DistilBERT
-Classificatore di emozioni multi-label che affronta il problema spesso ignorato del **rumore nelle label**.
+### [Multi-Label Emotion Classifier](https://github.com/edoardof01/fml-laboratory) — NLP with DistilBERT
+Multi-label emotion classifier that tackles the often-overlooked problem of **label noise**.
 
-- **Confident Learning** (CleanLab) per la pulizia automatica delle annotazioni rumorose
-- **Optuna** per l'ottimizzazione bayesiana degli iperparametri
-- **LIME** per la spiegabilità (XAI) delle predizioni
+- **Confident Learning** (CleanLab) for automatic cleaning of noisy annotations
+- **Optuna** for Bayesian hyperparameter optimisation
+- **LIME** for prediction explainability (XAI)
 
 ---
 
 ## 🧰 Tech Stack
 
-| Area | Tecnologie |
+| Area | Technologies |
 |---|---|
 | **Languages** | Java (Spring, JPA/Hibernate), Python (PyTorch, LangChain, Pandas), SQL (Postgres), C |
-| **Cloud & DevOps** | Docker, Kubernetes, Apache Kafka, GitHub Actions, Maven |
+| **Cloud & DevOps** | Docker, Kubernetes, Apache Kafka, GitHub Actions, Maven, ArgoCD, Terraform |
 | **AI & Data** | Vector DBs (Milvus), Redis, RAG Architectures, LLM Self-hosting (Ollama), NLP, XAI |
-| **Software Engineering** | TDD, Design Patterns, Microservices, DDD |
+| **Observability** | Prometheus, Grafana, Micrometer, Spring Boot Actuator |
+| **Software Engineering** | TDD, Design Patterns, Microservices, DDD, GitOps |
 
 ---
 
-## 📚 Apprendimento continuo
+## 📚 Continuous Learning
 
-Costruire sistemi non basta: bisogna capire il *perché* dietro ogni scelta. Per questo studio in modo sistematico e continuo — libri di testo, paper, blog tecnici, documentazione originale. Alcune aree che sto esplorando in questo periodo:
+Building systems isn't enough: you need to understand the *why* behind every choice. That's why I study systematically and continuously — textbooks, papers, technical blogs, original documentation. Some areas I'm currently exploring:
 
-- **Distributed Systems** — *Designing Data-Intensive Applications* (Kleppmann), paper su consensus algorithms
-- **AI/ML** — paper su architetture RAG avanzate, agentic systems, model evaluation
-- **Software Design** — *A Philosophy of Software Design* (Ousterhout), pattern architetturali
+- **Distributed Systems** — *Designing Data-Intensive Applications* (Kleppmann), papers on consensus algorithms
+- **AI/ML** — papers on advanced RAG architectures, agentic systems, model evaluation
+- **Software Design** — *A Philosophy of Software Design* (Ousterhout), architectural patterns
 
-Credo che l'ingegneria del software sia un mestiere che richiede umiltà intellettuale costante: il panorama cambia, e stare al passo significa non smettere mai di essere studenti.
+I believe software engineering is a craft that demands constant intellectual humility: the landscape shifts, and keeping up means never stopping being a student.
 
 ---
 
-*Trovo che l'intersezione tra rigore formale e ingegneria creativa sia il posto più stimolante in cui costruire software — e la traiettoria Gestionale → Informatica mi ha dato gli strumenti per abitare entrambe le sponde.*
+*I find that the intersection of formal rigour and creative engineering is the most stimulating place to build software — and the Management → Computer Engineering trajectory has given me the tools to inhabit both sides.*
